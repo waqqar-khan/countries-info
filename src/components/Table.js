@@ -41,7 +41,7 @@ const Table = ({ columns, data}) => {
   }
 
   return (
-    <div style={{ padding: '10px', margin: '10px', border: '1px solid #ddd' }}>
+    <div style={{ padding: '10px', margin: '10px' }}>
       <table style={{ width: '100%', borderCollapse: 'collapse' }}>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
