@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { fetchCountries } from "./Utils/api";
 import Table from "./components/Table";
 import ErrorBoundary from "./components/ErrorBoundary";
 const { createColumnHelper } = require("@tanstack/react-table");
@@ -59,18 +59,15 @@ function App() {
   const [filteredData, setFilteredData] = useState([]);
   const [search, setSearch] = useState("");
   const [populationFilter, setPopulationFilter] = useState("");
-  const [initialLoad, setInitialLoad] = useState(true); // Set initialLoad to true initially
+  const [initialLoad, setInitialLoad] = useState(true);
 
   useEffect(() => {
-    axios
-      .get("https://api.sampleapis.com/countries/countries")
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-        setData([]);
-      });
+    const fetchData = async () => {
+      const countries = await fetchCountries();
+      setData(countries);
+    };
+
+    fetchData();
   }, []);
 
   const handleSearch = (e) => {
@@ -191,7 +188,7 @@ function App() {
         ) : filteredData.length === 0 ? (
           <div>No results found</div>
         ) : (
-          <Table columns={columns} data={filteredData}/>
+          <Table columns={columns} data={filteredData} />
         )}
       </ErrorBoundary>
     </div>
