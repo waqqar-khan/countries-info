@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { fetchCountries } from "./Utils/api";
 import Table from "./components/Table";
 import ErrorBoundary from "./components/ErrorBoundary";
+import "./App.css";
+
 const { createColumnHelper } = require("@tanstack/react-table");
 const columnHelper = createColumnHelper();
 
@@ -33,7 +35,7 @@ const columns = [
         <img
           src={info.getValue()}
           alt={`${info.row.original.name} Flag`}
-          style={{ width: "50px", height: "auto" }}
+          className="table-image"
         />
       ) : (
         "NA"
@@ -46,7 +48,7 @@ const columns = [
         <img
           src={info.getValue()}
           alt={`${info.row.original.name} Emblem`}
-          style={{ width: "50px", height: "auto" }}
+          className="table-image"
         />
       ) : (
         "NA"
@@ -103,10 +105,12 @@ function App() {
   };
 
   const clearFilter = () => {
-    setSearch("");
-    setPopulationFilter("");
-    setFilteredData(data);
-    setInitialLoad(false);
+    if (search || populationFilter) {
+      setSearch("");
+      setPopulationFilter("");
+      setFilteredData(data)
+      setInitialLoad(false)
+    }
   };
 
   const showAllCountries = () => {
@@ -115,70 +119,31 @@ function App() {
   };
 
   return (
-    <div className="App" style={{ margin: "2% 4%" }}>
-      <h1 style={{ textAlign: "left" }}>Countries Info</h1>
-      <div
-        className="filters"
-        style={{
-          textAlign: "left",
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          margin: "10px 0 10px 0",
-        }}
-      >
+    <div className="App">
+      <h1>Countries Info</h1>
+      <div className="filters">
         <input
           type="text"
           placeholder="Country Name"
           value={search}
           maxLength={20}
           onChange={handleSearch}
-          style={{
-            padding: "10px",
-            marginRight: "10px",
-            placeholderColor: "gray",
-            color: "#000",
-            cursor: "text",
-            outlineColor: "#6907f3",
-          }}
+          className="filter-input"
         />
         <select
           value={populationFilter}
           onChange={handlePopulationFilter}
-          style={{ padding: "10px", marginRight: "10px", cursor: "pointer" }}
+          className="filter-select"
         >
           <option value="">Population</option>
           <option value="1000000">&lt; 1M</option>
           <option value="5000000">&lt; 5M</option>
           <option value="10000000">&lt; 10M</option>
         </select>
-        <button
-          onClick={clearFilter}
-          style={{
-            textDecoration: "underline",
-            textDecorationColor: "gray",
-            border: "none",
-            background: "none",
-            color: "#6907f3",
-            padding: "10px",
-            marginRight: "10px",
-            cursor: "pointer",
-          }}
-        >
+        <button onClick={clearFilter} className="filters-button clear">
           Clear
         </button>
-        <button
-          onClick={showAllCountries}
-          style={{
-            background: "#6907f2",
-            color: "#FFF",
-            border: "2px solid #6907f3",
-            borderRadius: "5px",
-            marginLeft: "auto",
-            padding: "10px",
-            cursor: "pointer",
-          }}
-        >
+        <button onClick={showAllCountries} className="filters-button show-all">
           Show all Countries
         </button>
       </div>

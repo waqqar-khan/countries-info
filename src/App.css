@@ -1,3 +1,73 @@
 .App {
-  text-align: center;
+  margin: 2% 4%;
+}
+
+.filters {
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0 10px 0;
+}
+
+.filters input[type="text"] {
+  padding: 10px;
+  margin-right: 10px;
+  color: #000;
+  cursor: text;
+  outline-color: #6907f3;
+}
+
+.filters input[type="text"]::placeholder {
+  color: gray;
+}
+
+.filters select {
+  padding: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.filters button {
+  border: none;
+  background: none;
+  color: #6907f3;
+  padding: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.filters button.clear {
+  text-decoration: underline;
+  text-decoration-color: gray;
+}
+
+.filters button.show-all {
+  background: #6907f2;
+  color: #fff;
+  border: 2px solid #6907f3;
+  border-radius: 5px;
+  margin-left: auto;
+}
+
+.TableContainer {
+  padding: 10px;
+  margin: 10px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.table img {
+  width: 50px;
+  height: auto;
 }
